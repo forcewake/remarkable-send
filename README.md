@@ -120,10 +120,10 @@ rendered PDFs:
 
 | Example | Exercises |
 |---|---|
-| [The E-Ink Reading Pipeline](examples/) | contents page, halftone portraits, metadata |
-| [Brutal Layout Stress Test](examples/) | 6-column tables, page-tall code, zalgo, 30-row tables |
-| [Theme: Book](examples/) | the serif longform theme |
-| [Weekly Report](examples/) | the everyday case: metrics tables, code, incidents |
+| [The E-Ink Reading Pipeline](examples/showcase.pdf) | contents page, halftone portraits, metadata |
+| [Brutal Layout Stress Test](examples/brutal-layout.pdf) | 6-column tables, page-tall code, zalgo, 30-row tables |
+| [Theme: Book](examples/theme-book.pdf) | the serif longform theme |
+| [Weekly Report](examples/weekly-report.pdf) | the everyday case: metrics tables, code, incidents |
 
 ![Weekly report](docs/report.png)
 
@@ -146,10 +146,10 @@ The layout never trusts a screen-space measurement for print: the rendered
 PDF itself is parsed to find where sections really landed, and anything that
 spilled gets squeezed and re-rendered. Pagination is a fact, not a hope.
 
-Full internals in [`references/`](references/): the
-[design system](references/design-system.md) (every value and its reason),
-[content preparation](references/content-preparation.md), and
-[rmapi operations](references/rmapi-operations.md) (every trap we hit:
+Full internals in [`references/`](skills/remarkable-send/references/): the
+[design system](skills/remarkable-send/references/design-system.md) (every value and its reason),
+[content preparation](skills/remarkable-send/references/content-preparation.md), and
+[rmapi operations](skills/remarkable-send/references/rmapi-operations.md) (every trap we hit:
 em-dash name matching, 429 bursts, tree-cache duplicates).
 
 ## Limitations, honestly
