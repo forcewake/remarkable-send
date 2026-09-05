@@ -43,7 +43,9 @@ tuned against the actual panel:
 ## What you get
 
 - **Three themes** — `grid` (technical brief), `book` (serif, for essays),
-  `compact` (dense, for manuals).
+  `compact` (dense, for manuals) — and two section rhythms:
+  `--sections flow` (articles, default) or `--sections pages` (digests:
+  one item per page).
 - **Automatic navigation** — every document ships with a PDF outline for the
   tablet's sidebar, correct metadata, and — at ≥4 sections — a clickable
   table of contents whose page numbers are *measured from the actual PDF*,
@@ -113,6 +115,9 @@ or drive it yourself:
 # a long read, serif
 ./scripts/remarkable_send.py --file chapter.md --theme book --folder "/Books"
 
+# a digest: every section opens its own page
+./scripts/remarkable_send.py --file digest.md --sections pages
+
 # an article with photos: dither first, then send
 ./scripts/preprocess_images.py trip.md --workdir /tmp/img --out trip.eink.md
 ./scripts/remarkable_send.py --file trip.eink.md --source example.com
@@ -132,7 +137,7 @@ renders — click a page to open the PDF.
 
 The form this pipeline ships daily in production: one news item per page,
 section badges, scores, sources, watchlist discipline. Real events.
-Source: [`signal-digest.md`](examples/signal-digest.md) · 10 pages
+Source: [`signal-digest.md`](examples/signal-digest.md) · 9 pages · `--sections pages`
 
 <p>
   <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-01.png" width="176" alt="cover"></a>
@@ -145,7 +150,7 @@ Source: [`signal-digest.md`](examples/signal-digest.md) · 10 pages
 ### [The E-Ink Reading Pipeline](examples/showcase.pdf) — the full tour
 
 Contents page with measured numbers, typography manifesto, decision table,
-halftone plates, boxed code. Source: [`showcase.md`](examples/showcase.md) · 11 pages
+halftone plates, boxed code. Source: [`showcase.md`](examples/showcase.md) · 6 pages
 
 <p>
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-01.png" width="176" alt="cover"></a>
@@ -159,7 +164,7 @@ halftone plates, boxed code. Source: [`showcase.md`](examples/showcase.md) · 11
 
 Six-column tables, code taller than a page, a 30-row table with repeated
 headers, unicode soup (CJK, RTL, zalgo), base64, a 300-word monoparagraph.
-Source: [`brutal-layout.md`](examples/brutal-layout.md) · 14 pages
+Source: [`brutal-layout.md`](examples/brutal-layout.md) · 11 pages
 
 <p>
   <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-03.png" width="176" alt="6-column table"></a>
@@ -170,7 +175,7 @@ Source: [`brutal-layout.md`](examples/brutal-layout.md) · 14 pages
 
 ### [Theme: Book](examples/theme-book.pdf) — the serif longform
 
-Source: [`theme-book.md`](examples/theme-book.md) · `--theme book`
+Source: [`theme-book.md`](examples/theme-book.md) · `--theme book --sections pages`
 
 <p>
   <a href="examples/theme-book.pdf"><img src="docs/pages/book-01.png" width="176" alt="book theme title page"></a>

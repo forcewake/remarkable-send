@@ -190,6 +190,15 @@ One line.
 
 ~~First render had no margins~~ → 13 mm margins → **12pt** → `shipped`.
 
+What this document proves, in one paragraph: a six-column table keeps its
+columns aligned without overlapping; a code block taller than a page splits
+cleanly with its box redrawn; a thirty-row table repeats its header on every
+continuation; CJK, RTL and combining-diacritic text stay inside the margins;
+footnotes land at the end without breaking the flow above them; and a
+300-word unbroken paragraph still settles into ~65-character lines. None of
+this required tuning per document — the same engine that renders the digest
+and the essay renders this.
+
 ---
 
 End of the stress test. If this reads well on e-ink, the layout holds.

@@ -95,10 +95,10 @@ h1.title { font-size: 30px; line-height: 1.08; font-weight: 700; margin: 0 0 10p
 .srcrow { font-family: %(MONO)s; font-size: 11.5px; color: #333; margin: 0 0 6px; }
 .srcrow b { color: #000; }
 .rule2 { border-top: 2px solid #000; margin: 14px 0 18px; }
-h2 { font-size: 24px; line-height: 1.12; font-weight: 700; margin: 26px 0 10px;
-     break-before: page; page-break-before: always; }
-/* an article that opens with a section keeps it on the title page */
-.content > h2:first-child { break-before: auto; page-break-before: auto; }
+h2 { font-size: 24px; line-height: 1.12; font-weight: 700; margin: 26px 0 10px; }
+/* digest mode: every section opens its own page (except right after the title) */
+body.sec-pages h2 { break-before: page; page-break-before: always; }
+body.sec-pages .content > h2:first-child { break-before: auto; page-break-before: auto; }
 h3 { font-size: 19px; font-weight: 700; margin: 20px 0 8px; }
 h4 { font-size: 16.5px; font-weight: 700; margin: 16px 0 6px; }
 /* headings never dangle at a page break without their content,
@@ -330,8 +330,12 @@ def set_pdf_metadata(pdf: Path, title: str, source: str) -> bool:
 
 
 def build_html(md_text: str, title: str, source: str, theme: str = "grid",
+               sections: str = "flow",
                toc_sections: list[dict] | None = None,
                toc_pages: list[int | None] | None = None) -> str:
+    if sections not in ("flow", "pages"):
+        raise ValueError(f"unknown sections mode: {sections}")
+    body_class = f"sec-{sections}"  # capture now: `sections` is reused by TOC code below
     if theme not in THEMES:
         raise ValueError(f"unknown theme: {theme}")
     body = md_to_html(md_text)
@@ -339,6 +343,11 @@ def build_html(md_text: str, title: str, source: str, theme: str = "grid",
     body = re.sub(r"<h1>.*?</h1>", "", body, count=1, flags=re.S)
     body = _img_to_figure(body)
     body, sections = tag_h2_sections(body)
+    # split the lede (everything before the first h2) so the title page
+    # carries title + lede + TOC together; nothing dangles on its own page
+    h2_at = re.search(r"<h2\b", body)
+    lede, body_rest = (body[:h2_at.start()], body[h2_at.start():]) if h2_at else (body, "")
+    body = body_rest
     toc_html = ""
     if toc_sections is None and len(sections) >= TOC_MIN_SECTIONS:
         toc_sections = sections
@@ -350,12 +359,13 @@ def build_html(md_text: str, title: str, source: str, theme: str = "grid",
     return f"""<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <title>{html.escape(title)}</title>
 {css.replace('%(SANS)s', SANS).replace('%(MONO)s', MONO).replace('%(SERIF)s', SERIF)}
-</head><body>
+</head><body class="{body_class}">
 <div class="bar"></div>
 <div class="runhead"><span>REMARKABLE READ</span><span>{today}</span></div>
 <h1 class="title">{html.escape(title)}</h1>
 {src}
 <div class="rule2"></div>
+{lede}
 {toc_html}
 <div class="content">
 {body}
@@ -398,6 +408,9 @@ def main() -> int:
     ap.add_argument("--theme", choices=THEMES, default="grid",
                     help="grid: default look; book: serif reading; "
                          "compact: dense for long docs")
+    ap.add_argument("--sections", choices=("flow", "pages"), default="flow",
+                    help="flow: sections run continuously (articles, default); "
+                         "pages: every section opens a fresh page (digests)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -426,7 +439,7 @@ def main() -> int:
         # (fixed-width .num), measure real section pages, re-render, verify
         pages: list[int | None] | None = None
         for attempt in range(5):
-            html_src = build_html(md_text, title, args.source, args.theme,
+            html_src = build_html(md_text, title, args.source, args.theme, args.sections,
                                   toc_sections=sections, toc_pages=pages)
             render_pdf(html_src, pdf)
             measured = locate_section_pages(pdf, sections, start_page=2)
@@ -435,7 +448,7 @@ def main() -> int:
             pages = measured
         print(f"TOC: {len(sections)} sections -> pages {[p for p in (pages or [])]}")
     else:
-        html_src = build_html(md_text, title, args.source, args.theme)
+        html_src = build_html(md_text, title, args.source, args.theme, args.sections)
         render_pdf(html_src, pdf)
 
     n = page_count(pdf)
