@@ -156,7 +156,7 @@ halftone plates, boxed code. Source: [`showcase.md`](examples/showcase.md) · 6 
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="176" alt="contents"></a>
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-03.png" width="176" alt="typography section"></a>
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="176" alt="Ada halftone plate"></a>
-  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="176" alt="Einstein plate"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-06.png" width="176" alt="themes and ship-it"></a>
 </p>
 
 ### [Brutal Layout Stress Test](examples/brutal-layout.pdf)
