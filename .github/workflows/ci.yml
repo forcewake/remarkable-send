@@ -1,0 +1,45 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install engine deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends chromium-browser poppler-utils fonts-liberation
+      - name: Syntax check
+        run: python3 -m py_compile scripts/*.py
+      - name: Render examples (stdlib fallback path, no uploads)
+        env:
+          REMARKABLE_OUTROOT: /tmp/out
+          CHROME_BIN: chromium-browser
+        run: |
+          # dry-run end-to-end on bare python: fallback markdown renderer,
+          # no pypdf, no markdown lib, no network, no upload
+          python3 scripts/remarkable_send.py --file examples/weekly-report.md --title "CI Weekly Report" --source ci --dry-run
+          python3 scripts/remarkable_send.py --file examples/brutal-layout.md --title "CI Stress Test" --source ci --theme compact --dry-run
+          test -f "/tmp/out/$(date +%Y-%m)/CI Weekly Report - $(date +%Y-%m-%d).pdf"
+          test -f "/tmp/out/$(date +%Y-%m)/CI Stress Test - $(date +%Y-%m-%d).pdf"
+      - name: Page geometry is exactly the rM2 screen
+        run: |
+          pdf="/tmp/out/$(date +%Y-%m)/CI Weekly Report - $(date +%Y-%m-%d).pdf"
+          pdftotext -bbox "$pdf" - | python3 -c "
+          import re, sys
+          html = sys.stdin.read()
+          pages = re.findall(r'width="([0-9.]+)" height="([0-9.]+)"', html)
+          assert pages, 'no pages parsed'
+          assert all(abs(float(w)-446.88) < 0.5 and abs(float(h)-595.92) < 0.5
+                     for w, h in pages), f'wrong page size: {pages[:2]}'
+          words = re.findall(r'<word xMin', html)
+          assert words, 'no text extracted'
+          print(f'geometry OK: {len(pages)} pages at 446.88 x 595.92 pt')
+          "
