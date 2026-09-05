@@ -11,10 +11,11 @@ newspaper-halftone images · clickable table of contents with measured page
 numbers · sidebar bookmarks · zero pinching, zero zooming.
 
 <p align="center">
-  <img src="docs/pages/showcase-02.png" width="200" alt="contents page">
-  <img src="docs/pages/showcase-05.png" width="200" alt="halftone plate">
-  <img src="docs/pages/signal-02.png" width="200" alt="digest divider">
-  <img src="docs/pages/signal-03.png" width="200" alt="digest news page">
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="230" alt="contents page with measured page numbers"></a>
+  &nbsp;
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="230" alt="Floyd-Steinberg halftone plate"></a>
+  &nbsp;
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="230" alt="digest news page, one item per page"></a>
 </p>
 
 Built as an agent skill ([Hermes Agent](https://github.com/NousResearch/hermes-agent)
@@ -124,52 +125,57 @@ Every render lands in `~/remarkable-out/YYYY-MM/` locally before upload.
 
 ## Examples
 
-Four ready-made documents live in [`examples/`](examples/) — sources and
-rendered PDFs. Pages below are actual renders, cut per page.
+Sources and full PDFs in [`examples/`](examples/). Pages below are actual
+renders — click a page to open the PDF.
 
-### The E-Ink Reading Pipeline — the showcase
-
-Eleven pages exercising everything: contents page with measured numbers,
-typography manifesto, two halftone plates, tables, boxed code.
-Source: [`showcase.md`](examples/showcase.md) · PDF: [`showcase.pdf`](examples/showcase.pdf)
-
-| | | | | |
-|---|---|---|---|---|
-| <img src="docs/pages/showcase-01.png" width="128"> | <img src="docs/pages/showcase-02.png" width="128"> | <img src="docs/pages/showcase-03.png" width="128"> | <img src="docs/pages/showcase-04.png" width="128"> | <img src="docs/pages/showcase-05.png" width="128"> |
-| cover | contents | typography | decision table | Ada plate |
-| <img src="docs/pages/showcase-06.png" width="128"> | <img src="docs/pages/showcase-07.png" width="128"> | <img src="docs/pages/showcase-08.png" width="128"> | <img src="docs/pages/showcase-09.png" width="128"> | <img src="docs/pages/showcase-10.png" width="128"> |
-
-### Brutal Layout Stress Test
-
-Six-column tables, code taller than a page, a 30-row table with repeated
-headers, unicode soup (CJK, RTL, zalgo), base64 and a 300-word monoparagraph.
-Source: [`brutal-layout.md`](examples/brutal-layout.md) · PDF: [`brutal-layout.pdf`](examples/brutal-layout.pdf) (14 pages)
-
-| | | | | |
-|---|---|---|---|---|
-| <img src="docs/pages/brutal-01.png" width="128"> | <img src="docs/pages/brutal-03.png" width="128"> | <img src="docs/pages/brutal-05.png" width="128"> | <img src="docs/pages/brutal-07.png" width="128"> | <img src="docs/pages/brutal-09.png" width="128"> |
-| <img src="docs/pages/brutal-11.png" width="128"> | <img src="docs/pages/brutal-13.png" width="128"> | <img src="docs/pages/brutal-14.png" width="128"> | | |
-
-### Signal Digest — agent-curated intelligence
+### [Signal Digest](examples/signal-digest.pdf) — agent-curated intelligence
 
 The form this pipeline ships daily in production: one news item per page,
-sections with scores and sources, watchlist discipline, contents page with
-measured page numbers. Real events, real structure.
-Source: [`signal-digest.md`](examples/signal-digest.md) · PDF: [`signal-digest.pdf`](examples/signal-digest.pdf) (10 pages)
+section badges, scores, sources, watchlist discipline. Real events.
+Source: [`signal-digest.md`](examples/signal-digest.md) · 10 pages
 
-| | | | | |
-|---|---|---|---|---|
-| <img src="docs/pages/signal-01.png" width="128"> | <img src="docs/pages/signal-02.png" width="128"> | <img src="docs/pages/signal-03.png" width="128"> | <img src="docs/pages/signal-04.png" width="128"> | <img src="docs/pages/signal-05.png" width="128"> |
-| cover | contents | executive #1 | executive #2 | market item |
-| <img src="docs/pages/signal-06.png" width="128"> | <img src="docs/pages/signal-07.png" width="128"> | <img src="docs/pages/signal-08.png" width="128"> | <img src="docs/pages/signal-09.png" width="128"> | <img src="docs/pages/signal-10.png" width="128"> |
+<p>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-01.png" width="176" alt="cover"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-02.png" width="176" alt="contents"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="176" alt="executive news page"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-04.png" width="176" alt="second executive"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-09.png" width="176" alt="watchlist page"></a>
+</p>
 
-### Theme: Book — the serif longform
+### [The E-Ink Reading Pipeline](examples/showcase.pdf) — the full tour
 
-Source: [`theme-book.md`](examples/theme-book.md) · PDF: [`theme-book.pdf`](examples/theme-book.pdf)
+Contents page with measured numbers, typography manifesto, decision table,
+halftone plates, boxed code. Source: [`showcase.md`](examples/showcase.md) · 11 pages
 
-| | |
-|---|---|
-| <img src="docs/pages/book-01.png" width="128"> | <img src="docs/pages/book-02.png" width="128"> |
+<p>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-01.png" width="176" alt="cover"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="176" alt="contents"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-03.png" width="176" alt="typography section"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="176" alt="Ada halftone plate"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-08.png" width="176" alt="code section"></a>
+</p>
+
+### [Brutal Layout Stress Test](examples/brutal-layout.pdf)
+
+Six-column tables, code taller than a page, a 30-row table with repeated
+headers, unicode soup (CJK, RTL, zalgo), base64, a 300-word monoparagraph.
+Source: [`brutal-layout.md`](examples/brutal-layout.md) · 14 pages
+
+<p>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-03.png" width="176" alt="6-column table"></a>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-05.png" width="176" alt="page-tall code"></a>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-07.png" width="176" alt="30-row table"></a>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-13.png" width="176" alt="unicode soup"></a>
+</p>
+
+### [Theme: Book](examples/theme-book.pdf) — the serif longform
+
+Source: [`theme-book.md`](examples/theme-book.md) · `--theme book`
+
+<p>
+  <a href="examples/theme-book.pdf"><img src="docs/pages/book-01.png" width="176" alt="book theme title page"></a>
+  <a href="examples/theme-book.pdf"><img src="docs/pages/book-02.png" width="176" alt="book theme chapter"></a>
+</p>
 
 ---
 
