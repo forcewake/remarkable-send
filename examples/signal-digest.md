@@ -46,11 +46,20 @@ Source: code.claude.com changelog
 
 **EXECUTIVE · score 84 · market**
 
-Per Bloomberg, DeepSeek is discussing a large order for Huawei AI chips
-for a new data-center in Inner Mongolia. Stage and size are not named in
-the excerpts; talks, not a deal.
+Per Bloomberg, DeepSeek is discussing a large order for Huawei AI chips to
+equip a new data-center in Inner Mongolia. The stage of the talks and the
+order size are not named in the excerpts — this is negotiations reporting,
+not a signed deal, and single-source market stories stay capped below the
+top score band for exactly that reason.
 
-**Why it matters:** domestic-capacity scaling signal amid export controls.
+**Why it matters:** if the order lands, it is a domestic-capacity scaling
+signal under export controls — training compute moving to sanctioned
+silicon at scale changes capacity planning for everyone downstream of
+Chinese model releases.
+
+**Watch:** procurement volume, data-center power permits in Inner
+Mongolia, and any Huawei statement. Talks collapse more often than they
+convert.
 
 Source: bloomberg.com (via Bloomberg reporting)
 
@@ -72,9 +81,20 @@ Source: github.com/vllm-project/vllm issue #55284
 
 **MATERIAL · score 70 · supply-chain**
 
-The module registry of Coder was compromised; attacker-published
-Terraform modules replaced community ones. Rotated credentials advised
-for anyone who pulled modules in the exposure window.
+The module registry of Coder was compromised: attacker-published
+Terraform modules displaced community ones, meaning `terraform init`
+against the registry could pull attacker code into build pipelines with
+whatever credentials the plan runner holds. The exposure window is
+published; anyone who pulled modules in it should treat registry content
+as untrusted until pinned.
+
+**Why it matters:** this is the second registry-style incident in one
+digest — the llms.txt research above is the same shape from the agent
+side. The pattern for the quarter is *trusted distribution points*, not
+zero-days: registries, docs files, package mirrors.
+
+**Action:** pin module versions by digest; rotate credentials available to
+plan runners; audit what executed during the window.
 
 Source: arstechnica.com
 
@@ -82,8 +102,19 @@ Source: arstechnica.com
 
 **MATERIAL · score 61 · cloud**
 
-AWS published a migration playbook alongside Bedrock changes: batch
-inference at 50% discount and general-availability pricing for Agents.
+AWS published a migration playbook alongside two Bedrock changes: batch
+inference at a fifty percent discount and general-availability pricing for
+Agents. The playbook itself is the more useful artifact — it walks through
+request signing, model mapping and the guardrails config that most teams
+skip on the first pass.
+
+**Why it matters:** batch pricing is the difference between nightly eval
+suites that run and nightly eval suites that get disabled when the bill
+arrives. If you are running evaluation or enrichment workloads
+request-by-request, this is the migration to make this quarter.
+
+**Action:** move anything latency-tolerant to batch; re-check guardrail
+policies before switching, GA pricing changed per-token assumptions.
 
 Source: aws.amazon.com blogs
 
@@ -91,10 +122,19 @@ Source: aws.amazon.com blogs
 
 **MATERIAL · score 58 · serving**
 
-After last week's incident, GLM-5.3 endpoints on Nous/OpenRouter no
-longer return 400s under long-context bursts; a fix commit landed in the
-gateway ("the decision to refuse a tool call lives entirely on the
-client").
+After last week's incident, GLM-5.3 endpoints on Nous/OpenRouter no longer
+return 400s under long-context bursts. The fix commit is small and telling:
+the decision to refuse a tool call now lives entirely on the client, where
+it belonged — the gateway had been rejecting requests it could not
+semantically judge.
+
+**Why it matters:** if you route agent traffic through OpenRouter with
+fallbacks, silent gateway-side refusals masquerade as model failures and
+poison your retry logic. Worth knowing the failure class is gone before
+you remove workarounds.
+
+**Action:** drop any 400-retry special-casing for this route; keep
+client-side refusal handling.
 
 Source: github.com/NousResearch/hermes-agent
 
@@ -102,10 +142,17 @@ Source: github.com/NousResearch/hermes-agent
 
 **WATCHLIST · score 54 · research**
 
-A preprint argues agents with persistent memory systematically
-over-trust their own recall: injected facts survive across sessions even
-after the source is discredited. Preliminary, n=4 benchmarks, no code
-release. Watch, don't act.
+A preprint argues that agents with persistent memory systematically
+over-trust their own recall: facts injected into memory during one session
+survive into later sessions even after the source is discredited, and
+explicit corrections decay faster than the original contamination. The
+mechanism the authors propose — provenance-weighted recall — is sensible;
+the evidence is four benchmarks and no code release.
+
+**Why it stays on the watchlist:** n=4 with no reproduction is a prompt
+for your own testing, not a basis for architecture decisions. If you run
+long-lived agent memory, replicate the persistence test on your own stack
+this month; that is the cheap version of acting on it.
 
 Source: arxiv.org preprint
 
