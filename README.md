@@ -11,11 +11,13 @@ newspaper-halftone images · clickable table of contents with measured page
 numbers · sidebar bookmarks · zero pinching, zero zooming.
 
 <p align="center">
-  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="230" alt="contents page with measured page numbers"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="220" alt="contents page with measured page numbers"></a>
   &nbsp;
-  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="230" alt="Floyd-Steinberg halftone plate"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="220" alt="Floyd-Steinberg halftone plate"></a>
   &nbsp;
-  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="230" alt="digest news page, one item per page"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="220" alt="digest news page, one item per page"></a>
+  &nbsp;
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-09.png" width="220" alt="wide table page"></a>
 </p>
 
 Built as an agent skill ([Hermes Agent](https://github.com/NousResearch/hermes-agent)
@@ -140,11 +142,10 @@ section badges, scores, sources, watchlist discipline. Real events.
 Source: [`signal-digest.md`](examples/signal-digest.md) · 9 pages · `--sections pages`
 
 <p>
-  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-01.png" width="176" alt="cover"></a>
-  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-02.png" width="176" alt="contents"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-01.png" width="176" alt="cover with contents"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-02.png" width="176" alt="executive news page"></a>
   <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="176" alt="executive news page"></a>
-  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-04.png" width="176" alt="second executive"></a>
-  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-09.png" width="176" alt="watchlist page"></a>
+  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-04.png" width="176" alt="market news page"></a>
 </p>
 
 ### [The E-Ink Reading Pipeline](examples/showcase.pdf) — the full tour
@@ -175,11 +176,13 @@ Source: [`brutal-layout.md`](examples/brutal-layout.md) · 11 pages
 
 ### [Theme: Book](examples/theme-book.pdf) — the serif longform
 
-Source: [`theme-book.md`](examples/theme-book.md) · `--theme book --sections pages`
+Source: [`theme-book.md`](examples/theme-book.md) · `--theme book --sections pages` · 5 pages
 
 <p>
-  <a href="examples/theme-book.pdf"><img src="docs/pages/book-01.png" width="176" alt="book theme title page"></a>
-  <a href="examples/theme-book.pdf"><img src="docs/pages/book-02.png" width="176" alt="book theme chapter"></a>
+  <a href="examples/theme-book.pdf"><img src="docs/pages/book-01.png" width="176" alt="title page with contents"></a>
+  <a href="examples/theme-book.pdf"><img src="docs/pages/book-02.png" width="176" alt="chapter one"></a>
+  <a href="examples/theme-book.pdf"><img src="docs/pages/book-03.png" width="176" alt="chapter two"></a>
+  <a href="examples/theme-book.pdf"><img src="docs/pages/book-04.png" width="176" alt="chapter three"></a>
 </p>
 
 ---

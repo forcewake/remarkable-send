@@ -20,6 +20,12 @@ For manuals and API references there is a third theme — 14 pt body, tighter
 leading, the same chrome. It packs roughly a fifth more words per page for
 the times a document must fit the flight, not the desk.
 
+## On margins that earn their keep
+
+The 13 mm side margins are not decoration: they are where a thumb rests
+while the other hand holds a pen. Typography that ignores the hand is
+furniture that ignores the room.
+
 ---
 
-Rendered: `remarkable_send.py --file theme-book.md --theme book`.
+Rendered: `remarkable_send.py --file theme-book.md --theme book --sections pages`.
