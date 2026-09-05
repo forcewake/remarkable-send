@@ -27,13 +27,13 @@ jobs:
           REMARKABLE_OUTROOT: ${{ github.workspace }}/out
           CHROME_BIN: chromium-browser
         run: |
-          python3 skills/remarkable-send/scripts/remarkable_send.py --file examples/weekly-report.md --title "CI Weekly Report" --source ci --dry-run
+          python3 skills/remarkable-send/scripts/remarkable_send.py --file examples/signal-digest.md --title "CI Signal Digest" --source ci --dry-run
           python3 skills/remarkable-send/scripts/remarkable_send.py --file examples/brutal-layout.md --title "CI Stress Test" --source ci --theme compact --dry-run
-          test -f "out/$(date +%Y-%m)/CI Weekly Report - $(date +%Y-%m-%d).pdf"
+          test -f "out/$(date +%Y-%m)/CI Signal Digest - $(date +%Y-%m-%d).pdf"
           test -f "out/$(date +%Y-%m)/CI Stress Test - $(date +%Y-%m-%d).pdf"
       - name: Page geometry is exactly the rM2 screen
         run: |
-          pdf="out/$(date +%Y-%m)/CI Weekly Report - $(date +%Y-%m-%d).pdf"
+          pdf="out/$(date +%Y-%m)/CI Signal Digest - $(date +%Y-%m-%d).pdf"
           pdftotext -bbox "$pdf" - | python3 -c "
           import re, sys
           html = sys.stdin.read()
