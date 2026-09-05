@@ -70,6 +70,7 @@ references its scripts via `${HERMES_SKILL_DIR}` / its own directory)
 ```bash
 git clone https://github.com/forcewake/remarkable-send.git
 cd remarkable-send
+pip install -r requirements.txt
 ./skills/remarkable-send/scripts/remarkable_send.py --file article.md --source example.com --dry-run
 ```
 
@@ -77,11 +78,11 @@ cd remarkable-send
 
 | Dependency | Notes |
 |---|---|
-| Python 3.10+ | stdlib only at the core |
+| Python 3.10+ | `pip install -r requirements.txt` (markdown, pypdf, pillow) |
 | Chrome/Chromium | headless print engine, on PATH |
 | [`rmapi` (ddvk fork)](https://github.com/ddvk/rmapi) | cloud upload; found via `RMAPI_BIN`, `~/bin/rmapi` or PATH. ⚠️ the original `juruen/rmapi` is dead — reMarkable changed its auth |
 | poppler (`pdftotext`, `pdftoppm`) | page measuring & previews |
-| optional: `pip install markdown pypdf pillow` | nicer markdown tables/footnotes, PDF metadata, image preprocessing — graceful fallbacks exist for all three |
+| `pip install -r requirements.txt` | `markdown` (tables/footnotes), `pypdf` (PDF metadata), `pillow` (image preprocessing) |
 
 Authenticate the tablet link once (one-time code from
 [my.remarkable.com/device/browser/connect](https://my.remarkable.com/device/browser/connect),

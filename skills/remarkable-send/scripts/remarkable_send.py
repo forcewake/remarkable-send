@@ -60,6 +60,13 @@ def find_rmapi() -> str:
     return _resolve_bin("RMAPI_BIN", [str(Path.home() / "bin" / "rmapi"), "rmapi"])
 
 
+try:
+    import markdown  # noqa: F401  (requirements.txt)
+except ImportError as _e:
+    raise SystemExit(
+        "missing dependency: markdown (pip install -r requirements.txt)"
+    ) from _e
+
 RMAPI = Path(find_rmapi())
 OUTROOT = Path(os.environ.get("REMARKABLE_OUTROOT",
                               Path.home() / "remarkable-out"))
@@ -203,89 +210,9 @@ hr { margin: 10px 0; }
 
 
 def md_to_html(md_text: str) -> str:
-    """markdown lib when available (hermes venv), else a compact fallback."""
-    try:
-        import markdown
-        return markdown.markdown(md_text, extensions=["extra", "sane_lists"])
-    except ImportError:
-        pass
-
-    def inline(s: str) -> str:
-        s = html.escape(s)
-        s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
-        s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
-        s = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
-        s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', s)
-        return s
-
-    out: list[str] = []
-    in_code, code, para, quote, lists = False, [], [], [], []
-
-    def flush_lists():
-        for kind, items in lists:
-            tag = "ol" if kind == "ol" else "ul"
-            out.append(f"<{tag}>" + "".join(f"<li>{i}</li>" for i in items) + f"</{tag}>")
-        lists.clear()
-
-    def flush_para():
-        if para:
-            out.append(f"<p>{inline(' '.join(para))}</p>")
-            para.clear()
-
-    def flush_quote():
-        if quote:
-            out.append("<blockquote><p>" + inline(" ".join(quote)) + "</p></blockquote>")
-            quote.clear()
-
-    for line in md_text.splitlines():
-        if line.startswith("```"):
-            flush_para(); flush_lists(); flush_quote()
-            if in_code:
-                out.append("<pre><code>" + html.escape("\n".join(code)) + "</code></pre>")
-                code, in_code = [], False
-            else:
-                in_code = True
-            continue
-        if in_code:
-            code.append(line)
-            continue
-        s = line.strip()
-        if not s:
-            flush_para(); flush_lists(); flush_quote()
-            continue
-        m = re.match(r"(#{1,4})\s+(.*)", s)
-        if m:
-            flush_para(); flush_lists(); flush_quote()
-            lvl = len(m.group(1)) + 1
-            out.append(f"<h{lvl}>{inline(m.group(2))}</h{lvl}>")
-            continue
-        if re.match(r"^(-{3,}|\*{3,})$", s):
-            flush_para(); flush_lists(); flush_quote()
-            out.append("<hr>")
-            continue
-        if s.startswith(">"):
-            flush_para(); flush_lists()
-            quote.append(s.lstrip("> "))
-            continue
-        flush_quote()
-        m = re.match(r"[-*+]\s+(.*)", s)
-        if m:
-            flush_para()
-            if not lists or lists[-1][0] != "ul":
-                lists.append(["ul", []])
-            lists[-1][1].append(inline(m.group(1)))
-            continue
-        m = re.match(r"\d+[.)]\s+(.*)", s)
-        if m:
-            flush_para()
-            if not lists or lists[-1][0] != "ol":
-                lists.append(["ol", []])
-            lists[-1][1].append(inline(m.group(1)))
-            continue
-        para.append(s)
-    flush_para(); flush_lists(); flush_quote()
-    return "\n".join(out)
-
+    """Full markdown: tables, footnotes, fenced code (the `extra` extension)."""
+    import markdown
+    return markdown.markdown(md_text, extensions=["extra", "sane_lists"])
 
 def run(cmd: list[str], **kw) -> subprocess.CompletedProcess:
     return subprocess.run(cmd, capture_output=True, text=True, **kw)

@@ -34,9 +34,9 @@ unprocessed, or manage files already on the device beyond its own folder.
 - `rmapi` (the [ddvk fork](https://github.com/ddvk/rmapi) v0.0.35+ — the
   original juruen build is dead), authenticated. The engine finds it via
   `RMAPI_BIN` env, `~/bin/rmapi`, or PATH.
-- Python 3.10+; optional extras: `pip install markdown pypdf pillow`
-  (fallbacks built in — TOC page numbers and PDF metadata need no extra
-  deps beyond `markdown`/`pypdf`, images need `pillow`).
+- Python 3.10+ with `pip install -r requirements.txt`
+  (`markdown` for tables/footnotes, `pypdf` for metadata, `pillow` for
+  image preprocessing).
 
 ## How to Run
 

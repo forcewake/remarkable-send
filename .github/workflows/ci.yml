@@ -16,9 +16,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends chromium-browser poppler-utils fonts-liberation
+      - name: Install python deps
+        run: pip install -r requirements.txt
       - name: Syntax check
         run: python3 -m py_compile skills/remarkable-send/scripts/*.py
-      - name: Render examples (stdlib fallback path, no uploads)
+      - name: Render examples (dry-run, no uploads)
         # NOTE: snap chromium on runners cannot write to /tmp — keep outputs
         # under the workspace, which the snap confinement allows
         env:
