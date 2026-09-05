@@ -53,7 +53,7 @@ tuned against the actual panel:
 ### Hermes Agent (one command)
 
 ```bash
-hermes skills install forcewake/remarkable-send
+hermes skills install forcewake/remarkable-send/skills/remarkable-send
 ```
 
 ### Claude Code / any SKILL.md-compatible agent
@@ -70,7 +70,7 @@ references its scripts via `${HERMES_SKILL_DIR}` / its own directory)
 ```bash
 git clone https://github.com/forcewake/remarkable-send.git
 cd remarkable-send
-./scripts/remarkable_send.py --file article.md --source example.com --dry-run
+./skills/remarkable-send/scripts/remarkable_send.py --file article.md --source example.com --dry-run
 ```
 
 ### Requirements
