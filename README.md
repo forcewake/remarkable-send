@@ -157,7 +157,7 @@ halftone plates, boxed code. Source: [`showcase.md`](examples/showcase.md) · 6 
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="176" alt="contents"></a>
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-03.png" width="176" alt="typography section"></a>
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="176" alt="Ada halftone plate"></a>
-  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-08.png" width="176" alt="code section"></a>
+  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="176" alt="Einstein plate"></a>
 </p>
 
 ### [Brutal Layout Stress Test](examples/brutal-layout.pdf)
@@ -168,9 +168,9 @@ Source: [`brutal-layout.md`](examples/brutal-layout.md) · 11 pages
 
 <p>
   <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-03.png" width="176" alt="6-column table"></a>
-  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-05.png" width="176" alt="page-tall code"></a>
-  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-07.png" width="176" alt="30-row table"></a>
-  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-13.png" width="176" alt="unicode soup"></a>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-06.png" width="176" alt="page-tall code"></a>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-09.png" width="176" alt="30-row table"></a>
+  <a href="examples/brutal-layout.pdf"><img src="docs/pages/brutal-11.png" width="176" alt="unicode soup"></a>
 </p>
 
 ### [Theme: Book](examples/theme-book.pdf) — the serif longform
