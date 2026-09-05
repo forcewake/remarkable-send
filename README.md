@@ -1,17 +1,25 @@
 # remarkable-send
 
+[![CI](https://github.com/forcewake/remarkable-send/actions/workflows/ci.yml/badge.svg)](https://github.com/forcewake/remarkable-send/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/device-reMarkable%202%20%2F%20Pro-111111.svg)](#limitations-honestly)
+
 **Markdown in — a beautifully typeset document on your reMarkable, one command later.**
 
-Pages sized 1:1 to the e-ink panel. True 12 pt body. Real page margins.
-Newspaper-halftone images. Clickable table of contents with measured page
-numbers. Sidebar bookmarks. Zero pinching, zero zooming, zero gray mush.
+Pages sized 1:1 to the e-ink panel · true 12 pt body · real page margins ·
+newspaper-halftone images · clickable table of contents with measured page
+numbers · sidebar bookmarks · zero pinching, zero zooming.
 
-![Showcase: cover, contents, halftone plates](docs/hero.png)
+<p align="center">
+  <img src="docs/pages/showcase-02.png" width="200" alt="contents page">
+  <img src="docs/pages/showcase-05.png" width="200" alt="halftone plate">
+  <img src="docs/pages/signal-02.png" width="200" alt="digest divider">
+  <img src="docs/pages/signal-03.png" width="200" alt="digest news page">
+</p>
 
 Built as an agent skill ([Hermes Agent](https://github.com/NousResearch/hermes-agent)
 / Claude-style `SKILL.md`), it works just as well as a plain CLI — because
-that's all it is underneath: three dependency-light Python scripts and a
-headless Chrome.
+that's all it is underneath: three Python scripts and a headless Chrome.
 
 ---
 
@@ -142,15 +150,18 @@ Source: [`brutal-layout.md`](examples/brutal-layout.md) · PDF: [`brutal-layout.
 | <img src="docs/pages/brutal-01.png" width="128"> | <img src="docs/pages/brutal-03.png" width="128"> | <img src="docs/pages/brutal-05.png" width="128"> | <img src="docs/pages/brutal-07.png" width="128"> | <img src="docs/pages/brutal-09.png" width="128"> |
 | <img src="docs/pages/brutal-11.png" width="128"> | <img src="docs/pages/brutal-13.png" width="128"> | <img src="docs/pages/brutal-14.png" width="128"> | | |
 
-### Weekly Report — the everyday case
+### Signal Digest — agent-curated intelligence
 
-Metrics tables, incident write-ups with code, a contents page because four
-sections crossed the threshold.
-Source: [`weekly-report.md`](examples/weekly-report.md) · PDF: [`weekly-report.pdf`](examples/weekly-report.pdf)
+The form this pipeline ships daily in production: one news item per page,
+sections with scores and sources, watchlist discipline, contents page with
+measured page numbers. Real events, real structure.
+Source: [`signal-digest.md`](examples/signal-digest.md) · PDF: [`signal-digest.pdf`](examples/signal-digest.pdf) (10 pages)
 
-| | | | | | |
-|---|---|---|---|---|---|
-| <img src="docs/pages/report-01.png" width="112"> | <img src="docs/pages/report-02.png" width="112"> | <img src="docs/pages/report-03.png" width="112"> | <img src="docs/pages/report-04.png" width="112"> | <img src="docs/pages/report-05.png" width="112"> | <img src="docs/pages/report-06.png" width="112"> |
+| | | | | |
+|---|---|---|---|---|
+| <img src="docs/pages/signal-01.png" width="128"> | <img src="docs/pages/signal-02.png" width="128"> | <img src="docs/pages/signal-03.png" width="128"> | <img src="docs/pages/signal-04.png" width="128"> | <img src="docs/pages/signal-05.png" width="128"> |
+| cover | contents | executive #1 | executive #2 | market item |
+| <img src="docs/pages/signal-06.png" width="128"> | <img src="docs/pages/signal-07.png" width="128"> | <img src="docs/pages/signal-08.png" width="128"> | <img src="docs/pages/signal-09.png" width="128"> | <img src="docs/pages/signal-10.png" width="128"> |
 
 ### Theme: Book — the serif longform
 
