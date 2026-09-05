@@ -34,17 +34,17 @@ tuned against the actual panel:
 ## What you get
 
 - **Three themes** — `grid` (technical brief), `book` (serif, for essays),
-  `compact` (dense, for manuals). ![Book theme](docs/book.png)
+  `compact` (dense, for manuals).
 - **Automatic navigation** — every document ships with a PDF outline for the
   tablet's sidebar, correct metadata, and — at ≥4 sections — a clickable
   table of contents whose page numbers are *measured from the actual PDF*,
-  not guessed (two-pass render). ![Contents page](docs/toc.png)
+  not guessed (two-pass render).
 - **E-ink images** — fetch → grayscale → autocontrast → Floyd–Steinberg
   dither at device resolution. A 404 degrades into an italic caption, never
   a broken build.
 - **Brutal-layout hardening** — wide tables repeat their headers on page
   breaks, headings never dangle or split, code blocks never tear, zalgo and
-  base64 stay inside margins. ![Stress test](docs/stress.png)
+  base64 stay inside margins.
 - **Reading queue tools** — list your Inbox as JSON, plan archiving of read
   items (dry-run by default), execute with one flag.
 
@@ -117,16 +117,50 @@ Every render lands in `~/remarkable-out/YYYY-MM/` locally before upload.
 ## Examples
 
 Four ready-made documents live in [`examples/`](examples/) — sources and
-rendered PDFs:
+rendered PDFs. Pages below are actual renders, cut per page.
 
-| Example | Exercises |
+### The E-Ink Reading Pipeline — the showcase
+
+Eleven pages exercising everything: contents page with measured numbers,
+typography manifesto, two halftone plates, tables, boxed code.
+Source: [`showcase.md`](examples/showcase.md) · PDF: [`showcase.pdf`](examples/showcase.pdf)
+
+| | | | | |
+|---|---|---|---|---|
+| <img src="docs/pages/showcase-01.png" width="128"> | <img src="docs/pages/showcase-02.png" width="128"> | <img src="docs/pages/showcase-03.png" width="128"> | <img src="docs/pages/showcase-04.png" width="128"> | <img src="docs/pages/showcase-05.png" width="128"> |
+| cover | contents | typography | decision table | Ada plate |
+| <img src="docs/pages/showcase-06.png" width="128"> | <img src="docs/pages/showcase-07.png" width="128"> | <img src="docs/pages/showcase-08.png" width="128"> | <img src="docs/pages/showcase-09.png" width="128"> | <img src="docs/pages/showcase-10.png" width="128"> |
+
+### Brutal Layout Stress Test
+
+Six-column tables, code taller than a page, a 30-row table with repeated
+headers, unicode soup (CJK, RTL, zalgo), base64 and a 300-word monoparagraph.
+Source: [`brutal-layout.md`](examples/brutal-layout.md) · PDF: [`brutal-layout.pdf`](examples/brutal-layout.pdf) (14 pages)
+
+| | | | | |
+|---|---|---|---|---|
+| <img src="docs/pages/brutal-01.png" width="128"> | <img src="docs/pages/brutal-03.png" width="128"> | <img src="docs/pages/brutal-05.png" width="128"> | <img src="docs/pages/brutal-07.png" width="128"> | <img src="docs/pages/brutal-09.png" width="128"> |
+| <img src="docs/pages/brutal-11.png" width="128"> | <img src="docs/pages/brutal-13.png" width="128"> | <img src="docs/pages/brutal-14.png" width="128"> | | |
+
+### Weekly Report — the everyday case
+
+Metrics tables, incident write-ups with code, a contents page because four
+sections crossed the threshold.
+Source: [`weekly-report.md`](examples/weekly-report.md) · PDF: [`weekly-report.pdf`](examples/weekly-report.pdf)
+
+| | | | | | |
+|---|---|---|---|---|---|
+| <img src="docs/pages/report-01.png" width="112"> | <img src="docs/pages/report-02.png" width="112"> | <img src="docs/pages/report-03.png" width="112"> | <img src="docs/pages/report-04.png" width="112"> | <img src="docs/pages/report-05.png" width="112"> | <img src="docs/pages/report-06.png" width="112"> |
+
+### Theme: Book — the serif longform
+
+Source: [`theme-book.md`](examples/theme-book.md) · PDF: [`theme-book.pdf`](examples/theme-book.pdf)
+
+| | |
 |---|---|
-| [The E-Ink Reading Pipeline](examples/showcase.pdf) | contents page, halftone portraits, metadata |
-| [Brutal Layout Stress Test](examples/brutal-layout.pdf) | 6-column tables, page-tall code, zalgo, 30-row tables |
-| [Theme: Book](examples/theme-book.pdf) | the serif longform theme |
-| [Weekly Report](examples/weekly-report.pdf) | the everyday case: metrics tables, code, incidents |
+| <img src="docs/pages/book-01.png" width="128"> | <img src="docs/pages/book-02.png" width="128"> |
 
-![Weekly report](docs/report.png)
+---
 
 ## How it works
 
