@@ -21,11 +21,11 @@ images, mermaid sources rendered to crisp grayscale diagrams, and a
 contents page whose numbers are **measured from the rendered PDF**, not
 guessed.
 
+<br clear="all" />
+
 ```bash
 hermes skills install forcewake/remarkable-send/skills/remarkable-send
 ```
-
-<br clear="all" />
 
 The skill lives in [`skills/remarkable-send/`](skills/remarkable-send/) —
 `SKILL.md` plus five deterministic scripts (engine, markdown cleaner, mermaid
