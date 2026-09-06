@@ -5,7 +5,7 @@
 [![Platform](https://img.shields.io/badge/device-reMarkable%202%20%2F%20Pro-111111.svg)](#limitations-honestly)
 
 <table><tr>
-<td valign="top" width="62%">
+<td valign="top" width="60%">
 
 **The reMarkable skill for AI agents: say "send this to my tablet" —
 get a beautifully typeset e-ink document back.**
@@ -21,21 +21,19 @@ to the 226 dpi screen, real margins, Floyd–Steinberg halftone images,
 mermaid sources rendered to crisp grayscale diagrams, and a contents page
 whose numbers are **measured from the rendered PDF**, not guessed.
 
-Install for Hermes:
+</td>
+<td valign="top" align="center" width="340">
+
+<img src="docs/demo-v2.gif" width="320" alt="a reMarkable 2 tablet flipping through pages rendered by this skill">
+
+<sub>device render: reMarkable</sub>
+
+</td>
+</tr></table>
 
 ```bash
 hermes skills install forcewake/remarkable-send/skills/remarkable-send
 ```
-
-</td>
-<td valign="top" align="center">
-
-<img src="docs/demo-v2.gif" width="330" alt="a reMarkable 2 tablet flipping through pages rendered by this skill">
-
-<sub>real pages on a reMarkable 2 · device render courtesy of reMarkable</sub>
-
-</td>
-</tr></table>
 
 The skill lives in [`skills/remarkable-send/`](skills/remarkable-send/) —
 `SKILL.md` plus five deterministic scripts (engine, markdown cleaner, mermaid
