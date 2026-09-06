@@ -14,6 +14,8 @@ sized 1:1 to the panel, measured clickable contents, Floyd–Steinberg
 halftones, mermaid rendered to crisp diagrams.
 
 <p align="center">
+  <a href="examples/signal-digest.pdf"><img src="docs/demo.gif" width="240" alt="page-flip demo"></a>
+  &nbsp;
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="230" alt="contents page with measured page numbers"></a>
   &nbsp;
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="230" alt="Floyd-Steinberg halftone plate"></a>
