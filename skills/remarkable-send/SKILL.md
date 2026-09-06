@@ -78,6 +78,8 @@ clickable "Содержание" page with real page numbers (two-pass render).
 | Need | Do |
 |---|---|
 | Article from URL | `web_extract` → save markdown → send with `--source <domain>` |
+| Review-first send | prepare → dry-run → `preview_pages.py` → send PNGs → upload on approval |
+| Messy source (nav wall, mermaid, dead assets) | `scripts/prepare_markdown.py IN OUT` |
 | File upload (docx/epub/pdf) | `scripts/extract_document.py file.docx out.md` → send `out.md` |
 | User's pasted text | Save as markdown verbatim (user's language) → send |
 | Reading queue | `--folder "/Inbox"` (default) |
@@ -106,6 +108,14 @@ clickable "Содержание" page with real page numbers (two-pass render).
 3. **Report** the engine's `UPLOADED: <folder>/<name> (N pages)` line to the
    user. Optionally show the local copy path (kept under
    `~/workspaces/remarkable-out/YYYY-MM/`). Clean up `/tmp/rm-send/`.
+
+**Review-first flow** (drop-zone default): before uploading, run
+`scripts/preview_pages.py <pdf> --outdir DIR`, send the preview PNGs to the
+user as a media group (pages count, theme, folder) and ask for approval;
+upload only after an explicit yes — apply requested changes and re-preview
+otherwise. `scripts/prepare_markdown.py` handles messy sources: strips the
+document's own navigation/anchor walls, renders ```mermaid blocks to e-ink
+PNGs (via `render_mermaid.py`), drops dead asset references.
 
 For layout changes, page geometry and the design system see
 `references/design-system.md`. For cloud/auth behavior, rate limits and
