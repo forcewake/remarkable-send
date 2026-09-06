@@ -86,21 +86,21 @@ PAGE_CSS = """
 @page { size: 157.7mm 210.3mm; margin: 13mm 13mm 15mm; }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: %(SANS)s; color: #000;
-       font-size: 16px; line-height: 1.55; overflow-wrap: anywhere; }
+       font-size: 14.5px; line-height: 1.5; overflow-wrap: anywhere; }
 .bar { border-top: 5px solid #000; margin-bottom: 6px; }
 .runhead { display: flex; justify-content: space-between; font-family: %(MONO)s;
   font-size: 10.5px; letter-spacing: .04em; border-bottom: 1px solid #000;
   padding: 2px 0 6px; margin-bottom: 18px; }
-h1.title { font-size: 30px; line-height: 1.08; font-weight: 700; margin: 0 0 10px; }
+h1.title { font-size: 28px; line-height: 1.08; font-weight: 700; margin: 0 0 9px; }
 .srcrow { font-family: %(MONO)s; font-size: 11.5px; color: #333; margin: 0 0 6px; }
 .srcrow b { color: #000; }
 .rule2 { border-top: 2px solid #000; margin: 14px 0 18px; }
-h2 { font-size: 24px; line-height: 1.12; font-weight: 700; margin: 26px 0 10px; }
+h2 { font-size: 22px; line-height: 1.12; font-weight: 700; margin: 22px 0 9px; }
 /* digest mode: every section opens its own page (except right after the title) */
 body.sec-pages h2 { break-before: page; page-break-before: always; }
 body.sec-pages .content > h2:first-child { break-before: auto; page-break-before: auto; }
-h3 { font-size: 19px; font-weight: 700; margin: 20px 0 8px; }
-h4 { font-size: 16.5px; font-weight: 700; margin: 16px 0 6px; }
+h3 { font-size: 18px; font-weight: 700; margin: 17px 0 7px; }
+h4 { font-size: 15px; font-weight: 700; margin: 14px 0 5px; }
 /* headings never dangle at a page break without their content,
    and a wrapped heading never splits across pages itself */
 h2, h3, h4 { break-after: avoid-page; page-break-after: avoid;
@@ -113,13 +113,13 @@ strong { font-weight: 700; }
 blockquote { margin: 14px 0; border-left: 4px solid #000; padding: 2px 0 2px 12px;
   font-style: italic; color: #222; }
 blockquote p { margin: 0 0 8px; }
-code { font-family: %(MONO)s; font-size: 14px; background: #f2f2f2; padding: 0 3px; }
-pre { font-family: %(MONO)s; font-size: 12.5px; line-height: 1.5; background: #f6f6f6;
+code { font-family: %(MONO)s; font-size: 12.5px; background: #f2f2f2; padding: 0 3px; }
+pre { font-family: %(MONO)s; font-size: 11.5px; line-height: 1.45; background: #f6f6f6;
   border: 1px solid #000; padding: 10px 12px; margin: 0 0 14px; white-space: pre-wrap;
   break-inside: avoid; page-break-inside: avoid; }
 pre code { background: none; padding: 0; font-size: 12.5px; }
-table { border-collapse: collapse; width: 100%%; margin: 0 0 14px;
-        font-size: 14px; break-inside: avoid; page-break-inside: avoid; }
+table { border-collapse: collapse; width: 100%%; margin: 0 0 12px;
+        font-size: 13px; break-inside: avoid; page-break-inside: avoid; }
 thead { display: table-header-group; }  /* repeat header on every split page */
 th, td { border: 1px solid #000; padding: 6px 9px; text-align: left;
          vertical-align: top; }
@@ -293,14 +293,26 @@ def pdftotext_pages(pdf: Path) -> list[str]:
 
 def locate_section_pages(pdf: Path, sections: list[dict],
                          start_page: int = 1) -> list[int | None]:
-    """1-based page each h2 starts on. Every h2 opens a fresh page, so its
-    title is the FIRST text there; monotonic scan, immune to body mentions."""
+    """1-based page each h2 starts on. Two regimes:
+    - pages mode: the h2 opens a fresh page, its title is the FIRST text;
+    - flow mode: the h2 sits mid-page, so match by containment — skipping
+      the TOC page (it quotes every title) and staying monotonic.
+    Titles are matched hyphen/whitespace-insensitively (pdftotext eats
+    hyphens at line wraps)."""
     pages = pdftotext_pages(pdf)
+    flat = [re.sub(r"[-\s]+", "", p) for p in pages]
+    keys = [re.sub(r"[-\s]+", "", s["title"])[:30] for s in sections]
+    # a TOC page quotes >= 4 section titles — never match against it
+    toc_pages = {i + 1 for i, f in enumerate(flat)
+                 if sum(k in f for k in keys) >= 4}
     found: list[int | None] = [None] * len(sections)
     cur = start_page
-    for i, sec in enumerate(sections):
+    for i, key in enumerate(keys):
         for k in range(cur, len(pages) + 1):
-            if _norm(pages[k - 1]).startswith(sec["title"]):
+            if k in toc_pages:
+                continue
+            page_flat = flat[k - 1]
+            if page_flat.startswith(key) or key in page_flat:
                 found[i] = k
                 cur = k
                 break
