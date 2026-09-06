@@ -4,24 +4,28 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/device-reMarkable%202%20%2F%20Pro-111111.svg)](#limitations-honestly)
 
-**The reMarkable skill for AI agents: say "send this to my tablet" — get a beautifully typeset e-ink document back.**
+<img align="right" src="docs/demo.gif" width="300" vspace="6" hspace="18" alt="page-flip demo: digest, plates, tables">
+
+**The reMarkable skill for AI agents: say "send this to my tablet" —
+get a beautifully typeset e-ink document back.**
 
 Native skill for [Hermes Agent](https://github.com/NousResearch/hermes-agent),
-works in any SKILL.md-compatible agent (Claude Code, OpenCode, …). The agent
-digests whatever you drop — URL, docx, epub, pdf, raw HTML with embedded
-diagrams, voice note — while the skill guarantees the e-ink craft: pages
-sized 1:1 to the panel, measured clickable contents, Floyd–Steinberg
-halftones, mermaid rendered to crisp diagrams.
+works in any SKILL.md-compatible agent (Claude Code, OpenCode, …). Drop a
+URL, docx, epub, pdf, raw HTML with embedded diagrams or a voice note into
+the chat — the agent replies with preview pages and, on your approval, a
+folder-perfect PDF lands on the tablet.
 
-<p align="center">
-  <a href="examples/signal-digest.pdf"><img src="docs/demo.gif" width="240" alt="page-flip demo"></a>
-  &nbsp;
-  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="230" alt="contents page with measured page numbers"></a>
-  &nbsp;
-  <a href="examples/showcase.pdf"><img src="docs/pages/showcase-05.png" width="230" alt="Floyd-Steinberg halftone plate"></a>
-  &nbsp;
-  <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="230" alt="digest news page, one item per page"></a>
-</p>
+The skill guarantees the e-ink craft the panel deserves: pages sized 1:1
+to the 226 dpi screen, 12 pt body, real margins, Floyd–Steinberg halftone
+images, mermaid sources rendered to crisp grayscale diagrams, and a
+contents page whose numbers are **measured from the rendered PDF**, not
+guessed.
+
+```bash
+hermes skills install forcewake/remarkable-send/skills/remarkable-send
+```
+
+<br clear="all" />
 
 The skill lives in [`skills/remarkable-send/`](skills/remarkable-send/) —
 `SKILL.md` plus five deterministic scripts (engine, markdown cleaner, mermaid
@@ -29,45 +33,6 @@ renderer, image ditherer, document extractor) and headless Chrome. Agents
 follow the procedure; humans can drive the same scripts as a plain CLI.
 
 ---
-
-## Why
-
-The reMarkable is the best reading surface in the house and the worst place
-to render for. Send a random PDF and you get letterboxed margins, 9 pt text
-and photos that turn into noise across 16 gray levels. This pipeline was
-tuned against the actual panel:
-
-| Decision | Value | Why |
-|---|---|---|
-| Page size | 157.7 × 210.3 mm | exactly the rM2 screen (1404×1872 @ 226 dpi) — full-bleed, no device scaling |
-| Margins | 13 mm / 15 mm | thumb room, pen rest; smaller than 12 pt body is a strain on e-ink |
-| Body | 16 CSS px = 12 pt | the community-verified legibility floor for this panel |
-| Column | single, ~65 chars | PDFs don't reflow; two columns force pinch-zoom |
-| Color | pure black on white | 16 gray levels, no ghosting fills |
-| Images | 1-bit Floyd–Steinberg @ 225 ppi | newspaper halftone; 1:1 device pixels, no resampling |
-
-## What you get
-
-- **Three themes** — `grid` (technical brief), `book` (serif, for essays),
-  `compact` (dense, for manuals) — and two section rhythms:
-  `--sections flow` (articles, default) or `--sections pages` (digests:
-  one item per page).
-- **Automatic navigation** — every document ships with a PDF outline for the
-  tablet's sidebar, correct metadata, and — at ≥4 sections — a clickable
-  table of contents whose page numbers are *measured from the actual PDF*,
-  not guessed (two-pass render).
-- **E-ink images** — fetch → grayscale → autocontrast → Floyd–Steinberg
-  dither at device resolution. A 404 degrades into an italic caption, never
-  a broken build.
-- **Brutal-layout hardening** — wide tables repeat their headers on page
-  breaks, headings never dangle or split, code blocks never tear, zalgo and
-  base64 stay inside margins.
-- **Eats whatever the agent is handed** — docx/epub/pdf/html extraction
-  with embedded base64 images pulled out, mermaid sources rendered to
-  grayscale diagrams, the document's own navigation deduped against the
-  generated TOC.
-- **Reading queue tools** — list your Inbox as JSON, plan archiving of read
-  items (dry-run by default), execute with one flag.
 
 ## The agent workflow
 
