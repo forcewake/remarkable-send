@@ -4,7 +4,8 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/device-reMarkable%202%20%2F%20Pro-111111.svg)](#limitations-honestly)
 
-<img align="right" src="docs/demo.gif" width="300" vspace="6" hspace="18" alt="page-flip demo: digest, plates, tables">
+<table><tr>
+<td valign="top" width="62%">
 
 **The reMarkable skill for AI agents: say "send this to my tablet" —
 get a beautifully typeset e-ink document back.**
@@ -13,19 +14,29 @@ Native skill for [Hermes Agent](https://github.com/NousResearch/hermes-agent),
 works in any SKILL.md-compatible agent (Claude Code, OpenCode, …). Drop a
 URL, docx, epub, pdf, raw HTML with embedded diagrams or a voice note into
 the chat — the agent replies with preview pages and, on your approval, a
-folder-perfect PDF lands on the tablet.
+perfectly typeset PDF lands on the tablet.
 
 The skill guarantees the e-ink craft the panel deserves: pages sized 1:1
-to the 226 dpi screen, 12 pt body, real margins, Floyd–Steinberg halftone
-images, mermaid sources rendered to crisp grayscale diagrams, and a
-contents page whose numbers are **measured from the rendered PDF**, not
-guessed.
+to the 226 dpi screen, real margins, Floyd–Steinberg halftone images,
+mermaid sources rendered to crisp grayscale diagrams, and a contents page
+whose numbers are **measured from the rendered PDF**, not guessed.
 
-<br clear="all" />
+Install for Hermes:
 
 ```bash
 hermes skills install forcewake/remarkable-send/skills/remarkable-send
 ```
+
+</td>
+<td valign="top" align="center">
+
+<img src="docs/demo.gif" width="340" alt="a reMarkable 2 tablet flipping through pages rendered by this skill">
+
+<sub>actual pages, actual screen — device photo:
+[Jcubic / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ReMarkable_2_tablet_with_Wikipedia_article.jpg), CC BY-SA 4.0</sub>
+
+</td>
+</tr></table>
 
 The skill lives in [`skills/remarkable-send/`](skills/remarkable-send/) —
 `SKILL.md` plus five deterministic scripts (engine, markdown cleaner, mermaid
