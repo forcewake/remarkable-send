@@ -32,8 +32,7 @@ hermes skills install forcewake/remarkable-send/skills/remarkable-send
 
 <img src="docs/demo.gif" width="340" alt="a reMarkable 2 tablet flipping through pages rendered by this skill">
 
-<sub>actual pages, actual screen — device photo:
-[Jcubic / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ReMarkable_2_tablet_with_Wikipedia_article.jpg), CC BY-SA 4.0</sub>
+<sub>real pages on a reMarkable 2 · device render courtesy of reMarkable</sub>
 
 </td>
 </tr></table>
