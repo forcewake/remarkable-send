@@ -4,11 +4,14 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-black.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/device-reMarkable%202%20%2F%20Pro-111111.svg)](#limitations-honestly)
 
-**Markdown in — a beautifully typeset document on your reMarkable, one command later.**
+**The reMarkable skill for AI agents: say "send this to my tablet" — get a beautifully typeset e-ink document back.**
 
-Pages sized 1:1 to the e-ink panel · true 12 pt body · real page margins ·
-newspaper-halftone images · clickable table of contents with measured page
-numbers · sidebar bookmarks · zero pinching, zero zooming.
+Native skill for [Hermes Agent](https://github.com/NousResearch/hermes-agent),
+works in any SKILL.md-compatible agent (Claude Code, OpenCode, …). The agent
+digests whatever you drop — URL, docx, epub, pdf, raw HTML with embedded
+diagrams, voice note — while the skill guarantees the e-ink craft: pages
+sized 1:1 to the panel, measured clickable contents, Floyd–Steinberg
+halftones, mermaid rendered to crisp diagrams.
 
 <p align="center">
   <a href="examples/showcase.pdf"><img src="docs/pages/showcase-02.png" width="230" alt="contents page with measured page numbers"></a>
@@ -18,9 +21,10 @@ numbers · sidebar bookmarks · zero pinching, zero zooming.
   <a href="examples/signal-digest.pdf"><img src="docs/pages/signal-03.png" width="230" alt="digest news page, one item per page"></a>
 </p>
 
-Built as an agent skill ([Hermes Agent](https://github.com/NousResearch/hermes-agent)
-/ Claude-style `SKILL.md`), it works just as well as a plain CLI — because
-that's all it is underneath: three Python scripts and a headless Chrome.
+The skill lives in [`skills/remarkable-send/`](skills/remarkable-send/) —
+`SKILL.md` plus five deterministic scripts (engine, markdown cleaner, mermaid
+renderer, image ditherer, document extractor) and headless Chrome. Agents
+follow the procedure; humans can drive the same scripts as a plain CLI.
 
 ---
 
@@ -56,8 +60,31 @@ tuned against the actual panel:
 - **Brutal-layout hardening** — wide tables repeat their headers on page
   breaks, headings never dangle or split, code blocks never tear, zalgo and
   base64 stay inside margins.
+- **Eats whatever the agent is handed** — docx/epub/pdf/html extraction
+  with embedded base64 images pulled out, mermaid sources rendered to
+  grayscale diagrams, the document's own navigation deduped against the
+  generated TOC.
 - **Reading queue tools** — list your Inbox as JSON, plan archiving of read
   items (dry-run by default), execute with one flag.
+
+## The agent workflow
+
+The skill ships a **review-first flow** the agent follows out of the box:
+
+```
+you drop a document into the chat
+  → extract_document.py      (docx/epub/pdf/html → markdown, embedded images pulled out)
+  → prepare_markdown.py      (strips nav walls/anchors, renders mermaid → e-ink PNGs)
+  → remarkable_send.py       (grid/book/compact theme, TOC with MEASURED page numbers)
+  → preview_pages.py         (cuts 4 review pages)
+  → agent sends you the previews and asks: "заливать?"  ← nothing uploads without your yes
+  → upload to /Inbox · confirm with name, folder, page count
+```
+
+In production this runs as a Telegram **drop-zone topic** for Hermes: Pavel
+throws in a link or file, the agent replies with preview pages, and only an
+explicit approval reaches the tablet. The daily-intelligence digest that
+inspired this skill ships through the same engine every morning.
 
 ## Install
 
@@ -102,9 +129,10 @@ reMarkable Connect subscription.
 
 ## Usage
 
-Ask your agent:
+Ask your agent (the trigger phrases are baked into the skill):
 
 > Send https://example.com/long-article to my reMarkable.
+> Отправь это на римарк / скинь на планшет — тоже работает.
 
 or drive it yourself:
 
