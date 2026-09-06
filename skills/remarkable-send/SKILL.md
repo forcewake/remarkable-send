@@ -80,7 +80,7 @@ clickable "Содержание" page with real page numbers (two-pass render).
 | Article from URL | `web_extract` → save markdown → send with `--source <domain>` |
 | Review-first send | prepare → dry-run → `preview_pages.py` → send PNGs → upload on approval |
 | Messy source (nav wall, mermaid, dead assets) | `scripts/prepare_markdown.py IN OUT` |
-| File upload (docx/epub/pdf) | `scripts/extract_document.py file.docx out.md` → send `out.md` |
+| File upload (docx/epub/pdf/html) | `scripts/extract_document.py file.docx out.md` → send `out.md` (html: embedded base64 images extracted, mermaid sources dropped when rendered PNGs exist) |
 | User's pasted text | Save as markdown verbatim (user's language) → send |
 | Reading queue | `--folder "/Inbox"` (default) |
 | Existing folder | `--folder "/EPAM"`, `"/Research"`, `"/Books"` — created if missing |
